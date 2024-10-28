@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Chamados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <header class="bg-blue-600 text-white shadow">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold">Gestão de Chamados</h1>
+            <nav>
+                <a href="/chamados/create/" class="px-4 py-2 bg-green-600 rounded-lg text-white">Novo Chamado</a>
+                <a href="/" class="ml-4 px-4 py-2 bg-gray-600 rounded-lg text-white">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Barra Lateral -->
+        <aside class="w-64 bg-gray-800 text-white h-screen hidden md:block">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4">Menu</h2>
+                <nav class="space-y-2">
+                    <a href="/chamados/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Chamado</a>
+                    <a href="/chamados/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Chamados</a>
+                    <a href="/ativos/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Ativo</a>
+                    <a href="/ativos/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="block py-2 px-4 rounded hover:bg-gray-700">Criar Chamado por Áudio</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 container mx-auto px-6 py-8">
+            <h2 class="text-2xl font-semibold mb-4">Lista de Chamados</h2>
+            <table class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+                <thead>
+                    <tr class="bg-gray-800 text-white">
+                        <th class="py-2 px-4 text-left">ID</th>
+                        <th class="py-2 px-4 text-left">Título</th>
+                        <th class="py-2 px-4 text-left">Responsável</th>
+                        <th class="py-2 px-4 text-left">Status</th>
+                        <th class="py-2 px-4 text-left">Prioridade</th>
+                        <th class="py-2 px-4 text-left">Descrição</th>
+                        <th class="py-2 px-4 text-left">Ativo</th>
+                        <th class="py-2 px-4 text-left">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chamado in chamados %}
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ chamado.id }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.titulo }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.responsavel }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.status }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.prioridade }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.descricao }}</td>
+                        <td class="py-2 px-4 border-b">{{ chamado.ativo.nome if chamado.ativo else 'N/A' }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="/chamados/{{ chamado.id }}/edit" class="text-blue-600 hover:underline">Editar</a>
+                            <a href="/chamados/{{ chamado.id }}/delete" class="text-red-600 hover:underline ml-4">Deletar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+</body>
+</html>

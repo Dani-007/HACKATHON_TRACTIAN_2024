@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserção de Chamados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Cabeçalho -->
+    <header class="bg-blue-600 text-white shadow">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold">Gestão de Chamados</h1>
+            <nav>
+                <a href="/" class="px-4 py-2 bg-gray-500 rounded-lg text-white">Voltar</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Barra Lateral -->
+        <aside class="w-64 bg-gray-800 text-white h-screen hidden md:block">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4">Menu</h2>
+                <nav class="space-y-2">
+                    <a href="/chamados/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Chamado</a>
+                    <a href="/chamados/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Chamados</a>
+                    <a href="/ativos/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Ativo</a>
+                    <a href="/ativos/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="block py-2 px-4 rounded hover:bg-gray-700">Criar Chamado por Áudio</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 container mx-auto px-6 py-8">
+            <h2 class="text-2xl font-semibold mb-4">Novo Chamado</h2>
+            <form action="/chamados/" method="post" class="bg-white shadow-lg rounded-lg p-8">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Título</label>
+                    <input type="text" name="titulo" class="w-full mt-1 p-2 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700">Responsável</label>
+                    <input type="text" name="responsavel" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700">Status</label>
+                    <select name="status" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                        <option value="Aberto">Aberto</option>
+                        <option value="Em Progresso">Em Progresso</option>
+                        <option value="Resolvido">Resolvido</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700">Prioridade</label>
+                    <select name="prioridade" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                        <option value="Baixa">Baixa</option>
+                        <option value="Média">Média</option>
+                        <option value="Alta">Alta</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="ativo_id" class="block text-sm font-medium text-gray-700">Ativo</label>
+                    <select id="ativo_id" name="ativo_id" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                        {% for ativo in ativos %}
+                            <option value="{{ ativo.id }}">{{ ativo.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Criar Chamado</button>
+                </div>
+            </form>
+        </main>
+
+    </div>
+
+</body>
+</html>

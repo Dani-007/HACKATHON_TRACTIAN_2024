@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição de Ferramentas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <header class="bg-blue-600 text-white shadow">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold">Gestão de Chamados</h1>
+            <nav>
+                <a href="/" class="px-4 py-2 bg-gray-600 rounded-lg text-white">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Barra Lateral -->
+        <aside class="w-64 bg-gray-800 text-white h-screen hidden md:block">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4">Menu</h2>
+                <nav class="space-y-2">
+                    <a href="/chamados/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Chamado</a>
+                    <a href="/chamados/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Chamados</a>
+                    <a href="/ativos/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Ativo</a>
+                    <a href="/ativos/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="block py-2 px-4 rounded hover:bg-gray-700">Criar Chamado por Áudio</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 container mx-auto px-6 py-8">
+            <h2 class="text-2xl font-semibold mb-4">Editar Ferramenta</h2>
+            <form action="/ferramentas/{{ ferramenta.id }}/" method="post" class="bg-white p-6 rounded-lg shadow-md">
+                <input type="hidden" name="_method" value="PUT">
+
+                <div class="mb-4">
+                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+                    <input type="text" id="nome" name="nome" value="{{ ferramenta.nome }}" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
+                    <input type="text" id="categoria" name="categoria" value="{{ ferramenta.categoria }}" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
+                    <textarea id="descricao" name="descricao" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">{{ ferramenta.descricao }}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="codigo_sap" class="block text-sm font-medium text-gray-700">Código SAP</label>
+                    <input type="text" id="codigo_sap" name="codigo_sap" value="{{ ferramenta.codigo_sap }}" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                    <select id="estado" name="estado" required class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                        <option value="Disponível" {% if ferramenta.estado == 'Disponível' %}selected{% endif %}>Disponível</option>
+                        <option value="Em Uso" {% if ferramenta.estado == 'Em Uso' %}selected{% endif %}>Em Uso</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500">Salvar</button>
+                <a href="/ferramentas/" class="mt-4 inline-block ml-4 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500">Cancelar</a>
+            </form>
+        </main>
+    </div>
+
+</body>
+</html>

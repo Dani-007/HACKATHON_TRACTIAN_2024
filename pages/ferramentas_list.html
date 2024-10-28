@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Ferramentas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        function filtrarFerramentas() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('toolsTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Começa de 1 para ignorar o cabeçalho
+                const nome = rows[i].getElementsByTagName('td')[1]?.textContent || "";
+                const codigoSap = rows[i].getElementsByTagName('td')[4]?.textContent || "";
+
+                if (nome.toLowerCase().includes(filter) || codigoSap.toLowerCase().includes(filter)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <header class="bg-blue-600 text-white shadow">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold">Gestão de Chamados</h1>
+            <nav>
+                <a href="/ferramentas/create/" class="px-4 py-2 bg-green-600 rounded-lg text-white">Nova ferramenta</a>
+                <a href="/" class="ml-4 px-4 py-2 bg-gray-600 rounded-lg text-white">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Barra Lateral -->
+        <aside class="w-64 bg-gray-800 text-white h-screen hidden md:block">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4">Menu</h2>
+                <nav class="space-y-2">
+                    <a href="/chamados/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Chamado</a>
+                    <a href="/chamados/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Chamados</a>
+                    <a href="/ativos/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Ativo</a>
+                    <a href="/ativos/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="block py-2 px-4 rounded hover:bg-gray-700">Criar Chamado por Áudio</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 container mx-auto px-6 py-8">
+            <h2 class="text-2xl font-semibold mb-4">Listagem de Ferramentas</h2>
+
+            <!-- Barra de pesquisa -->
+            <div class="mb-4">
+                <input type="text" id="searchInput" onkeyup="filtrarFerramentas()" placeholder="Pesquisar por Nome ou Código SAP"
+                    class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+
+            <table id="toolsTable" class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b font-semibold text-left">ID</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Nome</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Categoria</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Descrição</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Código SAP</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Estado</th>
+                        <th class="py-2 px-4 border-b font-semibold text-left">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ferramenta in ferramentas %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 px-4">{{ ferramenta.id }}</td>
+                        <td class="py-2 px-4">{{ ferramenta.nome }}</td>
+                        <td class="py-2 px-4">{{ ferramenta.categoria }}</td>
+                        <td class="py-2 px-4">{{ ferramenta.descricao }}</td>
+                        <td class="py-2 px-4">{{ ferramenta.codigo_sap }}</td>
+                        <td class="py-2 px-4">{{ ferramenta.estado }}</td>
+                        <td class="py-2 px-4 flex space-x-2">
+                            <a href="/ferramentas/{{ ferramenta.id }}/edit" class="text-blue-600 hover:underline">Editar</a>
+                            <form action="/ferramentas/{{ ferramenta.id }}/delete" method="get" style="display:inline;">
+                                <button type="submit" class="text-red-600 hover:underline">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="/ferramentas/create/" class="mt-4 inline-block bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-500 transition">Nova Ferramenta</a>
+        </main>
+    </div>
+    
+</body>
+</html>

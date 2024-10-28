@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação do Chamado</title>
+</head>
+<body>
+    <h1>Verifique os Detalhes do Chamado</h1>
+    <form action="/salvar_chamado" method="post">
+        <input type="hidden" name="titulo" value="{{ session['titulo'] }}">
+        <input type="hidden" name="responsavel" value="{{ session['responsavel'] }}">
+        <input type="hidden" name="status" value="{{ session['prioridade'] }}">
+        <input type="hidden" name="prioridade" value="{{ session['prioridade'] }}">
+        <input type="hidden" name="descricao" value="{{ session['descricao'] }}">
+
+        <p><strong>Título:</strong> {{ session['titulo']  }}</p>
+        <p><strong>Responsável:</strong> {{ session['responsavel'] }}</p>
+        <p><strong>Status:</strong> {{ session['status'] }}</p>
+        <p><strong>Prioridade:</strong> {{ session['prioridade'] }}</p>
+        <p><strong>Descrição:</strong> {{ session['descricao'] }}</p>
+
+        <button type="submit">Confirmar e Salvar</button>
+    </form>
+    <a href="/">Cancelar</a>
+</body>
+</html>

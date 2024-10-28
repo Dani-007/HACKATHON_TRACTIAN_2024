@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Chamados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold">Gestão de Chamados</h1>
+            <div>
+                <a href="/" class="text-white hover:underline">Início</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white h-screen hidden md:block">
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4">Menu</h2>
+                <nav class="space-y-2">
+                    <a href="/chamados/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Chamado</a>
+                    <a href="/chamados/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Chamados</a>
+                    <a href="/ativos/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Novo Ativo</a>
+                    <a href="/ativos/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="block py-2 px-4 rounded hover:bg-gray-700">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="block py-2 px-4 rounded hover:bg-gray-700">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="block py-2 px-4 rounded hover:bg-gray-700">Criar Chamado por Áudio</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="container mx-auto px-6 py-8">
+                <h2 class="text-3xl font-semibold text-gray-700 mb-6">Bem-vindo à Gestão de Chamados</h2>
+                <p class="text-lg text-gray-600 mb-4">Selecione uma das opções do menu para gerenciar seus chamados, ativos ou ferramentas.</p>
+
+                <!-- Mobile Menu for Small Screens -->
+                <div class="grid grid-cols-1 md:hidden gap-4 mb-6">
+                    <a href="/chamados/create/" class="bg-green-600 text-white text-center py-3 rounded-lg shadow hover:bg-green-500 transition">Novo Chamado</a>
+                    <a href="/chamados/" class="bg-blue-600 text-white text-center py-3 rounded-lg shadow hover:bg-blue-500 transition">Listar Chamados</a>
+                    <a href="/ativos/create/" class="bg-red-600 text-white text-center py-3 rounded-lg shadow hover:bg-red-500 transition">Novo Ativo</a>
+                    <a href="/ativos/" class="bg-purple-600 text-white text-center py-3 rounded-lg shadow hover:bg-purple-500 transition">Listar Ativos</a>
+                    <a href="/ferramentas/create/" class="bg-yellow-600 text-white text-center py-3 rounded-lg shadow hover:bg-yellow-500 transition">Nova Ferramenta</a>
+                    <a href="/ferramentas/" class="bg-blue-600 text-white text-center py-3 rounded-lg shadow hover:bg-blue-500 transition">Listar Ferramentas</a>
+                    <a href="/audio-chamado/" class="bg-teal-600 text-white text-center py-3 rounded-lg shadow hover:bg-teal-500 transition">Criar Chamado por Áudio</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
